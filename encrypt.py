@@ -18,9 +18,12 @@ class Encrypt:
         secret = str(secret).encode('utf-8')
         secrets = self.public_encrypt(secret)
         final_data = {'data': credentials.decode('utf-8'), 'secret': secrets.decode('utf-8')}
+        final_data_json = json.dumps(final_data, indent=4)
         print(final_data)
         f = open('final_data.txt', 'w')
         f.write(str(final_data))
+        with open('final_data.json', 'w') as outfile:
+            outfile.write(final_data_json)
         f.close()
 
     def public_encrypt(self, data):

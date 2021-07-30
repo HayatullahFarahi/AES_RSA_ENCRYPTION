@@ -23,6 +23,7 @@ class Decrypt:
     def aes_decrypt(self, mode, key, iv, data):
         cipher = AES.new(key, mode, iv)
         decrypted = cipher.decrypt(b64decode(data))
+        print(type(ast.literal_eval(decrypted.decode())))
         print('*='*30)
         print(decrypted.decode())
 
