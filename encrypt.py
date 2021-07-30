@@ -4,13 +4,14 @@ from base64 import b64encode
 from Crypto import Random
 from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.PublicKey import RSA
+import ast
 
 
 class Encrypt:
 
     def encrypt_data(self):
-        f = open('credentials.json',)
-        credentials = json.load(f)
+        f = open('credentials.json', encoding='utf-8')
+        credentials = ast.literal_eval(f.read())
         key, iv = Random.new().read(32), Random.new().read(16)
         credentials = self.aes_encrypt(AES.MODE_GCM, credentials, key, iv)
         secret = {"key": key, "iv": iv}
